@@ -21,6 +21,7 @@ function App() {
   const [amount, setAmount] = useState("");
   // Alert
   const [alert, setAlert] = useState({ showAlert: false });
+  // ********* End of State Value **********
 
   // ********* Functionality **********
   // Handle Charge
@@ -55,6 +56,20 @@ function App() {
       });
     }
   };
+  // Clear All Items
+  const clearItems = () => {
+    setExpenses([]);
+    handleAlert({ type: "success", text: "all items deleted" });
+  };
+  // Handle Delete
+  const handleDelete = (id) => {
+    console.log(`Deleted Item ${id}`);
+  };
+  // Handle Edit
+  const handleEdit = (id) => {
+    console.log(`Edited Item ${id}`);
+  };
+  // ********* End of Functionality **********
 
   return (
     <>
@@ -68,7 +83,12 @@ function App() {
           handleAmount={handleAmount}
           handleSubmit={handleSubmit}
         />
-        <ExpenseList expenses={expenses} />
+        <ExpenseList
+          expenses={expenses}
+          handleDelete={handleDelete}
+          handleEdit={handleEdit}
+          clearItems={clearItems}
+        />
       </main>
       <h1>
         total spending:{" "}
