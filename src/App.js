@@ -22,17 +22,24 @@ function App() {
 
   // ********* Functionality **********
   const handleCharge = (e) => {
-    console.log(e.target.value);
     setCharge(e.target.value);
   };
 
   const handleAmount = (e) => {
-    console.log(e.target.value);
     setAmount(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (charge !== "" && amount > 0) {
+      const createExpense = { id: uuidv4(), charge, amount };
+      setExpenses([createExpense, ...expenses]);
+      setCharge("");
+      setAmount("");
+    } else {
+      // Alert function
+    }
   };
 
   return (
@@ -54,7 +61,7 @@ function App() {
         <span className="total">
           $
           {expenses.reduce((acc, curr) => {
-            return (acc += curr.amount);
+            return (acc += parseInt(curr.amount));
           }, 0)}
         </span>
       </h1>
